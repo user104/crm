@@ -1,0 +1,20 @@
+.sidebar {
+    background-color: rgb(47, 52, 61);
+    height: 100%;
+    padding: 0;
+}
+
+.menu-text {
+    color: #ffffff;
+}
+
+.nav > li > a:hover {
+    background-color: rgb(36, 40, 47);
+    border-top: 1px rgb(65,72,82);
+    border-bottom: 1px rgb(26,35,49);
+}
+.brd{
+    border-top: 1px aqua;
+    border-bottom: 1px rgb(26,35,49);
+}
+
