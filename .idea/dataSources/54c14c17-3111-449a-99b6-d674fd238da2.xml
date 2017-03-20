@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="hibernate.cfg.xml/Hibernate">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="crm_database">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="destributor"/>
+    <schema id="4" parent="1" name="distr_jdbc"/>
+    <schema id="5" parent="1" name="hibernate_new"/>
+    <schema id="6" parent="1" name="hibernate_user"/>
+    <schema id="7" parent="1" name="imported_db"/>
+    <schema id="8" parent="1" name="information_schema"/>
+    <schema id="9" parent="1" name="many_to_one"/>
+    <schema id="10" parent="1" name="many_to_one_hibernate"/>
+    <schema id="11" parent="1" name="mysql"/>
+    <schema id="12" parent="1" name="performance_schema"/>
+    <schema id="13" parent="1" name="sakila"/>
+    <schema id="14" parent="1" name="sys"/>
+    <schema id="15" parent="1" name="usersdb"/>
+    <schema id="16" parent="1" name="world"/>
+  </database-model>
+</dataSource>
