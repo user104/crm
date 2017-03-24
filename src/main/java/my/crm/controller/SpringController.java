@@ -90,4 +90,11 @@ public class SpringController extends HttpServlet {
         return "login";
     }
 
+
+    //TODO: read comany names for input + add post version of mapping
+    @RequestMapping("/add company")
+    public String addCompany(){
+
+        return "add_company";
+    }
 }
