@@ -18,8 +18,8 @@
                 </div>
                 <div class="panel-body">
                     <p class="text-center">
-                        <c:if test="${registration!=null}">
-                            <c:out value="${registration}"/>
+                        <c:if test="${registrationError!=null}">
+                            <c:out value="${registrationError}"/>
                         </c:if>
                     </p>
                     <form method="post" action="registration" role="form">

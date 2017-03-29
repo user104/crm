@@ -45,12 +45,17 @@ public class SpringController extends HttpServlet {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String getRegistrationPostPage(@RequestParam("login") String login, @RequestParam("password") String password, @RequestParam("email") String email, Model model) {
-        String registration = action.register(login, password, email);
-        if (registration.equals("Your registration has been successful!")) {
-            model.addAttribute("registration", registration);
-            return "login";
-        }else {
-            model.addAttribute("registration", registration);
+        if (action.checkLogin(login)) {
+            if (action.checkEmail(email)) {
+                action.register(login, password, email);
+                model.addAttribute("registrationSuccess", "Your registration has been successful!");
+                return "login";
+            } else {
+                model.addAttribute("registrationError", "Email is already in use");
+                return "registration";
+            }
+        } else {
+            model.addAttribute("registrationError", "Login is already in use");
             return "registration";
         }
     }

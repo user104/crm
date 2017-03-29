@@ -2,16 +2,15 @@ package my.crm.model;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 import java.sql.*;;
 import java.util.List;
 
 public class Action {
-    private String url = "jdbc:mysql://127.0.0.1:3306?useSSL=false";
-    private String loginDB = "root";
-    private String passwordDB = "root";
-
 
     public List<Companies> companies() {
         SessionFactory sessionFactory = new Configuration()
@@ -94,82 +93,99 @@ public class Action {
     }
 
     public boolean login(String login, String password) {
-        if (login != null) {
-            Connection conn = null;
+        if (login != null && password !=null) {
+            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+            SessionFactory factory = null;
             try {
-                Class.forName("com.mysql.jdbc.Driver");
-                conn = DriverManager.getConnection(url, loginDB, passwordDB);
-                conn.setCatalog("crm_database");
-                String query = "SELECT password FROM user WHERE login =?";
-                PreparedStatement ps = conn.prepareStatement(query);
-                ps.setString(1, login);
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    if (password.equals(rs.getString("password"))) {
+
+                factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+                Session session = factory.getCurrentSession();
+                session.beginTransaction();
+                //noinspection JpaQlInspection
+                List<User> users = session.createQuery("FROM User").getResultList();
+                session.getTransaction().commit();
+
+                for (User user : users) {
+                    if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
                         return true;
                     }
                 }
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
+
             } finally {
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                if (factory != null) {
+                    factory.close();
                 }
             }
         }
         return false;
     }
 
-    public String register(String login, String password, String email) {
-        if (login != null && password != null && email != null) {
-            Connection conn = null;
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                conn = DriverManager.getConnection(url, loginDB, passwordDB);
-                conn.setCatalog("crm_database");
-                String verifyLogin = "SELECT login FROM user WHERE login=?";
+    public boolean checkLogin(String login) {
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+        SessionFactory factory = null;
+        try {
+            factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+            Session session = factory.getCurrentSession();
+            session.beginTransaction();
+            //noinspection JpaQlInspection
+            List<User> users = session.createQuery("FROM User").getResultList();
+            session.getTransaction().commit();
 
-                PreparedStatement psLogin = conn.prepareStatement(verifyLogin);
-                psLogin.setString(1, login);
-                ResultSet rsLogin = psLogin.executeQuery();
-                if (rsLogin.next()) {
-                    return "Login is already in use";
+            for (User user : users) {
+                if (user.getLogin().equals(login)) {
+                    return false;
                 }
-                String verifyEmail = "SELECT email FROM user WHERE email=?";
-                PreparedStatement psEmail = conn.prepareStatement(verifyEmail);
-                psEmail.setString(1, email);
-                ResultSet rsEmail = psEmail.executeQuery();
-                if (rsEmail.next()) {
-                    return "Email is already in use";
-                } else {
-                    String addUser = "INSERT INTO user(login, password, email) VALUES(?,?,?);";
-                    PreparedStatement psAddUser = conn.prepareStatement(addUser);
-                    psAddUser.setString(1, login);
-                    psAddUser.setString(2, password);
-                    psAddUser.setString(3, email);
-                    psAddUser.executeUpdate();
-                    return "Your registration has been successful!";
+            }
+        } finally {
+            if (factory != null) {
+                factory.close();
+            }
+        }
+        return true;
+    }
+
+    public boolean checkEmail(String email) {
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+        SessionFactory factory = null;
+        try {
+            factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+            Session session = factory.getCurrentSession();
+            session.beginTransaction();
+            //noinspection JpaQlInspection
+            List<User> users = session.createQuery("FROM User").getResultList();
+            session.getTransaction().commit();
+
+            for (User user : users) {
+                if (user.getEmail().equals(email)) {
+                    return false;
                 }
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            }
+        } finally {
+            if (factory != null) {
+                factory.close();
+            }
+        }
+        return true;
+    }
+
+    public void register(String login, String password, String email) {
+        if (login != null && password != null && email != null) {
+            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+            SessionFactory factory = null;
+            try {
+
+                factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+                Session session = factory.getCurrentSession();
+                session.beginTransaction();
+                User user = new User(login,password,email);
+                session.persist(user);
+                session.getTransaction().commit();
+
             } finally {
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                if (factory != null) {
+                    factory.close();
                 }
             }
         }
-        return "An unknown error has occured during registration. Please try again.";
     }
 }
