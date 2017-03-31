@@ -13,16 +13,5 @@
       <resolve-scope>destributor:</resolve-scope>
       <unqualified-resolve-schemas>destributor:</unqualified-resolve-schemas>
     </data-source>
-    <data-source name="hibernate.cfg.xml/Hibernate" uuid="54c14c17-3111-449a-99b6-d674fd238da2">
-      <database-info product="MySQL" version="5.7.13-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">
-        <extra-name-characters>#@</extra-name-characters>
-        <identifier-quote-string>`</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
-      <user-name>root</user-name>
-      <introspection-schemas>*:crm_database</introspection-schemas>
-      <resolve-scope>crm_database:</resolve-scope>
-      <unqualified-resolve-schemas>crm_database:</unqualified-resolve-schemas>
-    </data-source>
   </component>
 </project>
