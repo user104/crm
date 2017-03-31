@@ -1,5 +1,7 @@
 my\crm\springconfig\WebAppConfig.class
+my\crm\controller\FormController.class
 Start\Start.class
+my\crm\model\User.class
 my\crm\model\Action.class
 my\crm\model\Tasks.class
 my\crm\controller\SpringController.class

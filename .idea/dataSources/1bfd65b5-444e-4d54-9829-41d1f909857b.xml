@@ -12,15 +12,15 @@
     <schema id="6" parent="1" name="hibernate_user"/>
     <schema id="7" parent="1" name="imported_db"/>
     <schema id="8" parent="1" name="information_schema"/>
-    <schema id="9" parent="1" name="mysql"/>
-    <schema id="10" parent="1" name="performance_schema"/>
-    <schema id="11" parent="1" name="sakila"/>
-    <schema id="12" parent="1" name="sys"/>
-    <schema id="13" parent="1" name="usersdb"/>
-    <schema id="14" parent="1" name="world"/>
-    <schema id="15" parent="1" name="many_to_one"/>
-    <schema id="16" parent="1" name="many_to_one_hibernate"/>
-    <schema id="17" parent="1" name="springmvc_plus_hibernate"/>
+    <schema id="9" parent="1" name="many_to_one"/>
+    <schema id="10" parent="1" name="many_to_one_hibernate"/>
+    <schema id="11" parent="1" name="mysql"/>
+    <schema id="12" parent="1" name="performance_schema"/>
+    <schema id="13" parent="1" name="sakila"/>
+    <schema id="14" parent="1" name="springmvc_plus_hibernate"/>
+    <schema id="15" parent="1" name="sys"/>
+    <schema id="16" parent="1" name="usersdb"/>
+    <schema id="17" parent="1" name="world"/>
     <table id="18" parent="2" name="companies"/>
     <table id="19" parent="2" name="contact_person"/>
     <table id="20" parent="2" name="dealings"/>

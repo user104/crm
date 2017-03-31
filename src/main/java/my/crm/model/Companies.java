@@ -1,15 +1,16 @@
 package my.crm.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "companies")
 public class Companies {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
     @Column(name = "comp_name")
     private String comp_name;
 
@@ -39,6 +40,14 @@ public class Companies {
         this.comp_phone_number = comp_phone_number;
         this.comp_email = comp_email;
         this.contact_type = contact_type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getComp_name() {
@@ -96,6 +105,7 @@ public class Companies {
 
         Companies companies = (Companies) o;
 
+        if (id != companies.id) return false;
         if (comp_name != null ? !comp_name.equals(companies.comp_name) : companies.comp_name != null) return false;
         if (comp_address != null ? !comp_address.equals(companies.comp_address) : companies.comp_address != null)
             return false;
@@ -109,24 +119,13 @@ public class Companies {
 
     @Override
     public int hashCode() {
-        int result = comp_name != null ? comp_name.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (comp_name != null ? comp_name.hashCode() : 0);
         result = 31 * result + (comp_address != null ? comp_address.hashCode() : 0);
         result = 31 * result + (comp_website != null ? comp_website.hashCode() : 0);
         result = 31 * result + (comp_phone_number != null ? comp_phone_number.hashCode() : 0);
         result = 31 * result + (comp_email != null ? comp_email.hashCode() : 0);
         result = 31 * result + (contact_type != null ? contact_type.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Companies{" +
-                "comp_name='" + comp_name + '\'' +
-                ", comp_address='" + comp_address + '\'' +
-                ", comp_website='" + comp_website + '\'' +
-                ", comp_phone_number='" + comp_phone_number + '\'' +
-                ", comp_email='" + comp_email + '\'' +
-                ", contact_type='" + contact_type + '\'' +
-                '}';
     }
 }

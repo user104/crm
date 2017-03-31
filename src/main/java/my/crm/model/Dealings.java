@@ -127,17 +127,4 @@ public class Dealings {
         result = 31 * result + (deal_stage != null ? deal_stage.hashCode() : 0);
         return result;
     }
-
-    @Override
-    public String toString() {
-        return "Dealings{" +
-                "id=" + id +
-                ", deal_name='" + deal_name + '\'' +
-                ", comp_name='" + comp_name + '\'' +
-                ", cont_name='" + cont_name + '\'' +
-                ", deal_budget='" + deal_budget + '\'' +
-                ", deal_status='" + deal_status + '\'' +
-                ", deal_stage='" + deal_stage + '\'' +
-                '}';
-    }
 }
