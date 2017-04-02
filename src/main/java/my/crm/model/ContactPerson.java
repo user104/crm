@@ -1,15 +1,16 @@
 package my.crm.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "contact_person")
 public class ContactPerson {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
     @Column(name = "cont_name")
     private String cont_name;
 
@@ -39,6 +40,14 @@ public class ContactPerson {
         this.cont_phone_number = cont_phone_number;
         this.cont_email = cont_email;
         this.contact_type = contact_type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCont_name() {
@@ -94,39 +103,28 @@ public class ContactPerson {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ContactPerson person = (ContactPerson) o;
+        ContactPerson that = (ContactPerson) o;
 
-        if (cont_name != null ? !cont_name.equals(person.cont_name) : person.cont_name != null) return false;
-        if (comp_name != null ? !comp_name.equals(person.comp_name) : person.comp_name != null) return false;
-        if (cont_position != null ? !cont_position.equals(person.cont_position) : person.cont_position != null)
+        if (id != that.id) return false;
+        if (cont_name != null ? !cont_name.equals(that.cont_name) : that.cont_name != null) return false;
+        if (comp_name != null ? !comp_name.equals(that.comp_name) : that.comp_name != null) return false;
+        if (cont_position != null ? !cont_position.equals(that.cont_position) : that.cont_position != null)
             return false;
-        if (cont_phone_number != null ? !cont_phone_number.equals(person.cont_phone_number) : person.cont_phone_number != null)
+        if (cont_phone_number != null ? !cont_phone_number.equals(that.cont_phone_number) : that.cont_phone_number != null)
             return false;
-        if (cont_email != null ? !cont_email.equals(person.cont_email) : person.cont_email != null) return false;
-        return contact_type != null ? contact_type.equals(person.contact_type) : person.contact_type == null;
-
+        if (cont_email != null ? !cont_email.equals(that.cont_email) : that.cont_email != null) return false;
+        return contact_type != null ? contact_type.equals(that.contact_type) : that.contact_type == null;
     }
 
     @Override
     public int hashCode() {
-        int result = cont_name != null ? cont_name.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (cont_name != null ? cont_name.hashCode() : 0);
         result = 31 * result + (comp_name != null ? comp_name.hashCode() : 0);
         result = 31 * result + (cont_position != null ? cont_position.hashCode() : 0);
         result = 31 * result + (cont_phone_number != null ? cont_phone_number.hashCode() : 0);
         result = 31 * result + (cont_email != null ? cont_email.hashCode() : 0);
         result = 31 * result + (contact_type != null ? contact_type.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "ContactPerson{" +
-                "cont_name='" + cont_name + '\'' +
-                ", comp_name='" + comp_name + '\'' +
-                ", cont_position='" + cont_position + '\'' +
-                ", cont_phone_number='" + cont_phone_number + '\'' +
-                ", cont_email='" + cont_email + '\'' +
-                ", contact_type='" + contact_type + '\'' +
-                '}';
     }
 }

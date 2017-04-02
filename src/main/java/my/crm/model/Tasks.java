@@ -7,6 +7,10 @@ import javax.persistence.*;
 public class Tasks {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
     @Column(name = "task_name")
     private String task_name;
 
@@ -23,18 +27,26 @@ public class Tasks {
     private String task_status;
 
     @Column(name = "deal_id")
-    private int id;
+    private int deal_id;
 
     public Tasks(){
 
     }
 
-    public Tasks(String task_name, String comp_name, String cont_name, String deadline, String task_status, int id) {
+    public Tasks(String task_name, String comp_name, String cont_name, String deadline, String task_status, int deal_id) {
         this.task_name = task_name;
         this.comp_name = comp_name;
         this.cont_name = cont_name;
         this.deadline = deadline;
         this.task_status = task_status;
+        this.deal_id = deal_id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -78,12 +90,12 @@ public class Tasks {
         this.task_status = task_status;
     }
 
-    public int getId() {
-        return id;
+    public int getDeal_id() {
+        return deal_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDeal_id(int deal_id) {
+        this.deal_id = deal_id;
     }
 
     @Override
@@ -94,6 +106,7 @@ public class Tasks {
         Tasks tasks = (Tasks) o;
 
         if (id != tasks.id) return false;
+        if (deal_id != tasks.deal_id) return false;
         if (task_name != null ? !task_name.equals(tasks.task_name) : tasks.task_name != null) return false;
         if (comp_name != null ? !comp_name.equals(tasks.comp_name) : tasks.comp_name != null) return false;
         if (cont_name != null ? !cont_name.equals(tasks.cont_name) : tasks.cont_name != null) return false;
@@ -103,24 +116,13 @@ public class Tasks {
 
     @Override
     public int hashCode() {
-        int result = task_name != null ? task_name.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (task_name != null ? task_name.hashCode() : 0);
         result = 31 * result + (comp_name != null ? comp_name.hashCode() : 0);
         result = 31 * result + (cont_name != null ? cont_name.hashCode() : 0);
         result = 31 * result + (deadline != null ? deadline.hashCode() : 0);
         result = 31 * result + (task_status != null ? task_status.hashCode() : 0);
-        result = 31 * result + id;
+        result = 31 * result + deal_id;
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Tasks{" +
-                "task_name='" + task_name + '\'' +
-                ", comp_name='" + comp_name + '\'' +
-                ", cont_name='" + cont_name + '\'' +
-                ", deadline='" + deadline + '\'' +
-                ", task_status='" + task_status + '\'' +
-                ", id=" + id +
-                '}';
     }
 }

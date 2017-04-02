@@ -75,7 +75,7 @@ public class Action {
     public List<Tasks> tasks() {
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(Dealings.class)
+                .addAnnotatedClass(Tasks.class)
                 .buildSessionFactory();
         try {
             Session session = sessionFactory.getCurrentSession();
