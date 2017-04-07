@@ -1,6 +1,8 @@
 package my.crm.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "companies")
@@ -12,34 +14,35 @@ public class Companies {
     private int id;
 
     @Column(name = "comp_name")
-    private String comp_name;
+    private String companyName;
 
     @Column(name = "comp_address")
-    private String comp_address;
+    private String companyAddress;
 
     @Column(name = "comp_website")
-    private String comp_website;
+    private String companyWebsite;
 
     @Column(name = "comp_phone_number")
-    private String comp_phone_number;
+    private String companyPhoneNumber;
 
     @Column(name = "comp_email")
-    private String comp_email;
+    private String companyEmail;
 
-    @Column(name = "contact_type")
-    private String contact_type;
+    @OneToMany(mappedBy = "companies", fetch = FetchType.EAGER)
+    private List<ContactPerson> contactPersons = new ArrayList<>();
+
 
     public Companies() {
 
     }
 
-    public Companies(String comp_name, String comp_address, String comp_website, String comp_phone_number, String comp_email, String contact_type) {
-        this.comp_name = comp_name;
-        this.comp_address = comp_address;
-        this.comp_website = comp_website;
-        this.comp_phone_number = comp_phone_number;
-        this.comp_email = comp_email;
-        this.contact_type = contact_type;
+    public Companies(String companyName, String companyAddress, String companyWebsite, String companyPhoneNumber, String companyEmail, List<ContactPerson> contactPersons) {
+        this.companyName = companyName;
+        this.companyAddress = companyAddress;
+        this.companyWebsite = companyWebsite;
+        this.companyPhoneNumber = companyPhoneNumber;
+        this.companyEmail = companyEmail;
+        this.contactPersons = contactPersons;
     }
 
     public int getId() {
@@ -50,52 +53,52 @@ public class Companies {
         this.id = id;
     }
 
-    public String getComp_name() {
-        return comp_name;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setComp_name(String comp_name) {
-        this.comp_name = comp_name;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
-    public String getComp_address() {
-        return comp_address;
+    public String getCompanyAddress() {
+        return companyAddress;
     }
 
-    public void setComp_address(String comp_address) {
-        this.comp_address = comp_address;
+    public void setCompanyAddress(String companyAddress) {
+        this.companyAddress = companyAddress;
     }
 
-    public String getComp_website() {
-        return comp_website;
+    public String getCompanyWebsite() {
+        return companyWebsite;
     }
 
-    public void setComp_website(String comp_website) {
-        this.comp_website = comp_website;
+    public void setCompanyWebsite(String companyWebsite) {
+        this.companyWebsite = companyWebsite;
     }
 
-    public String getComp_phone_number() {
-        return comp_phone_number;
+    public String getCompanyPhoneNumber() {
+        return companyPhoneNumber;
     }
 
-    public void setComp_phone_number(String comp_phone_number) {
-        this.comp_phone_number = comp_phone_number;
+    public void setCompanyPhoneNumber(String companyPhoneNumber) {
+        this.companyPhoneNumber = companyPhoneNumber;
     }
 
-    public String getComp_email() {
-        return comp_email;
+    public String getCompanyEmail() {
+        return companyEmail;
     }
 
-    public void setComp_email(String comp_email) {
-        this.comp_email = comp_email;
+    public void setCompanyEmail(String companyEmail) {
+        this.companyEmail = companyEmail;
     }
 
-    public String getContact_type() {
-        return contact_type;
+    public List<ContactPerson> getContactPersons() {
+        return contactPersons;
     }
 
-    public void setContact_type(String contact_type) {
-        this.contact_type = contact_type;
+    public void setContactPersons(List<ContactPerson> contactPersons) {
+        this.contactPersons = contactPersons;
     }
 
     @Override
@@ -106,26 +109,28 @@ public class Companies {
         Companies companies = (Companies) o;
 
         if (id != companies.id) return false;
-        if (comp_name != null ? !comp_name.equals(companies.comp_name) : companies.comp_name != null) return false;
-        if (comp_address != null ? !comp_address.equals(companies.comp_address) : companies.comp_address != null)
+        if (companyName != null ? !companyName.equals(companies.companyName) : companies.companyName != null)
             return false;
-        if (comp_website != null ? !comp_website.equals(companies.comp_website) : companies.comp_website != null)
+        if (companyAddress != null ? !companyAddress.equals(companies.companyAddress) : companies.companyAddress != null)
             return false;
-        if (comp_phone_number != null ? !comp_phone_number.equals(companies.comp_phone_number) : companies.comp_phone_number != null)
+        if (companyWebsite != null ? !companyWebsite.equals(companies.companyWebsite) : companies.companyWebsite != null)
             return false;
-        if (comp_email != null ? !comp_email.equals(companies.comp_email) : companies.comp_email != null) return false;
-        return contact_type != null ? contact_type.equals(companies.contact_type) : companies.contact_type == null;
+        if (companyPhoneNumber != null ? !companyPhoneNumber.equals(companies.companyPhoneNumber) : companies.companyPhoneNumber != null)
+            return false;
+        if (companyEmail != null ? !companyEmail.equals(companies.companyEmail) : companies.companyEmail != null)
+            return false;
+        return contactPersons != null ? contactPersons.equals(companies.contactPersons) : companies.contactPersons == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (comp_name != null ? comp_name.hashCode() : 0);
-        result = 31 * result + (comp_address != null ? comp_address.hashCode() : 0);
-        result = 31 * result + (comp_website != null ? comp_website.hashCode() : 0);
-        result = 31 * result + (comp_phone_number != null ? comp_phone_number.hashCode() : 0);
-        result = 31 * result + (comp_email != null ? comp_email.hashCode() : 0);
-        result = 31 * result + (contact_type != null ? contact_type.hashCode() : 0);
+        result = 31 * result + (companyName != null ? companyName.hashCode() : 0);
+        result = 31 * result + (companyAddress != null ? companyAddress.hashCode() : 0);
+        result = 31 * result + (companyWebsite != null ? companyWebsite.hashCode() : 0);
+        result = 31 * result + (companyPhoneNumber != null ? companyPhoneNumber.hashCode() : 0);
+        result = 31 * result + (companyEmail != null ? companyEmail.hashCode() : 0);
+        result = 31 * result + (contactPersons != null ? contactPersons.hashCode() : 0);
         return result;
     }
 }

@@ -18,9 +18,7 @@ import java.util.List;
 @Controller
 public class SpringController extends HttpServlet {
 
-    //TODO: singleton:
     private Action action = new Action();
-
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String getLoginPage() {

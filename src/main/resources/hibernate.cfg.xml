@@ -16,6 +16,10 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <mapping class="my.crm.model.User"/>
+        <mapping class="my.crm.model.Companies"/>
+        <mapping class="my.crm.model.ContactPerson"/>
+        <mapping class="my.crm.model.Dealings"/>
+        <mapping class="my.crm.model.Tasks"/>
 
     </session-factory>
 

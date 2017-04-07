@@ -1,6 +1,8 @@
 package my.crm.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "contact_person")
@@ -12,34 +14,38 @@ public class ContactPerson {
     private int id;
 
     @Column(name = "cont_name")
-    private String cont_name;
-
-    @Column(name = "comp_name")
-    private String comp_name;
+    private String conactName;
 
     @Column(name = "cont_position")
-    private String cont_position;
+    private String conactPosition;
 
     @Column(name = "cont_phone_number")
-    private String cont_phone_number;
+    private String conactPhoneNumber;
 
     @Column(name = "cont_email")
-    private String cont_email;
+    private String conactEmail;
 
     @Column(name = "contact_type")
-    private String contact_type;
+    private String conactType;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private Companies companies;
+
+    @OneToMany(mappedBy = "contactPerson", fetch = FetchType.EAGER)
+    private List<Dealings> dealings = new ArrayList<>();
 
     public ContactPerson(){
 
     }
 
-    public ContactPerson(String cont_name, String comp_name, String cont_position, String cont_phone_number, String cont_email, String contact_type) {
-        this.cont_name = cont_name;
-        this.comp_name = comp_name;
-        this.cont_position = cont_position;
-        this.cont_phone_number = cont_phone_number;
-        this.cont_email = cont_email;
-        this.contact_type = contact_type;
+    public ContactPerson(String conactName, String conactPosition, String conactPhoneNumber, String conactEmail, String conactType, Companies companies, List<Dealings> dealings) {
+        this.conactName = conactName;
+        this.conactPosition = conactPosition;
+        this.conactPhoneNumber = conactPhoneNumber;
+        this.conactEmail = conactEmail;
+        this.conactType = conactType;
+        this.companies = companies;
+        this.dealings = dealings;
     }
 
     public int getId() {
@@ -50,52 +56,60 @@ public class ContactPerson {
         this.id = id;
     }
 
-    public String getCont_name() {
-        return cont_name;
+    public String getConactName() {
+        return conactName;
     }
 
-    public void setCont_name(String cont_name) {
-        this.cont_name = cont_name;
+    public void setConactName(String conactName) {
+        this.conactName = conactName;
     }
 
-    public String getComp_name() {
-        return comp_name;
+    public String getConactPosition() {
+        return conactPosition;
     }
 
-    public void setComp_name(String comp_name) {
-        this.comp_name = comp_name;
+    public void setConactPosition(String conactPosition) {
+        this.conactPosition = conactPosition;
     }
 
-    public String getCont_position() {
-        return cont_position;
+    public String getConactPhoneNumber() {
+        return conactPhoneNumber;
     }
 
-    public void setCont_position(String cont_position) {
-        this.cont_position = cont_position;
+    public void setConactPhoneNumber(String conactPhoneNumber) {
+        this.conactPhoneNumber = conactPhoneNumber;
     }
 
-    public String getCont_phone_number() {
-        return cont_phone_number;
+    public String getConactEmail() {
+        return conactEmail;
     }
 
-    public void setCont_phone_number(String cont_phone_number) {
-        this.cont_phone_number = cont_phone_number;
+    public void setConactEmail(String conactEmail) {
+        this.conactEmail = conactEmail;
     }
 
-    public String getCont_email() {
-        return cont_email;
+    public String getConactType() {
+        return conactType;
     }
 
-    public void setCont_email(String cont_email) {
-        this.cont_email = cont_email;
+    public void setConactType(String conactType) {
+        this.conactType = conactType;
     }
 
-    public String getContact_type() {
-        return contact_type;
+    public Companies getCompanies() {
+        return companies;
     }
 
-    public void setContact_type(String contact_type) {
-        this.contact_type = contact_type;
+    public void setCompanies(Companies companies) {
+        this.companies = companies;
+    }
+
+    public List<Dealings> getDealings() {
+        return dealings;
+    }
+
+    public void setDealings(List<Dealings> dealings) {
+        this.dealings = dealings;
     }
 
     @Override
@@ -106,25 +120,27 @@ public class ContactPerson {
         ContactPerson that = (ContactPerson) o;
 
         if (id != that.id) return false;
-        if (cont_name != null ? !cont_name.equals(that.cont_name) : that.cont_name != null) return false;
-        if (comp_name != null ? !comp_name.equals(that.comp_name) : that.comp_name != null) return false;
-        if (cont_position != null ? !cont_position.equals(that.cont_position) : that.cont_position != null)
+        if (conactName != null ? !conactName.equals(that.conactName) : that.conactName != null) return false;
+        if (conactPosition != null ? !conactPosition.equals(that.conactPosition) : that.conactPosition != null)
             return false;
-        if (cont_phone_number != null ? !cont_phone_number.equals(that.cont_phone_number) : that.cont_phone_number != null)
+        if (conactPhoneNumber != null ? !conactPhoneNumber.equals(that.conactPhoneNumber) : that.conactPhoneNumber != null)
             return false;
-        if (cont_email != null ? !cont_email.equals(that.cont_email) : that.cont_email != null) return false;
-        return contact_type != null ? contact_type.equals(that.contact_type) : that.contact_type == null;
+        if (conactEmail != null ? !conactEmail.equals(that.conactEmail) : that.conactEmail != null) return false;
+        if (conactType != null ? !conactType.equals(that.conactType) : that.conactType != null) return false;
+        if (companies != null ? !companies.equals(that.companies) : that.companies != null) return false;
+        return dealings != null ? dealings.equals(that.dealings) : that.dealings == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (cont_name != null ? cont_name.hashCode() : 0);
-        result = 31 * result + (comp_name != null ? comp_name.hashCode() : 0);
-        result = 31 * result + (cont_position != null ? cont_position.hashCode() : 0);
-        result = 31 * result + (cont_phone_number != null ? cont_phone_number.hashCode() : 0);
-        result = 31 * result + (cont_email != null ? cont_email.hashCode() : 0);
-        result = 31 * result + (contact_type != null ? contact_type.hashCode() : 0);
+        result = 31 * result + (conactName != null ? conactName.hashCode() : 0);
+        result = 31 * result + (conactPosition != null ? conactPosition.hashCode() : 0);
+        result = 31 * result + (conactPhoneNumber != null ? conactPhoneNumber.hashCode() : 0);
+        result = 31 * result + (conactEmail != null ? conactEmail.hashCode() : 0);
+        result = 31 * result + (conactType != null ? conactType.hashCode() : 0);
+        result = 31 * result + (companies != null ? companies.hashCode() : 0);
+        result = 31 * result + (dealings != null ? dealings.hashCode() : 0);
         return result;
     }
 }
