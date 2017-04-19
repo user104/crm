@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-${(sessionScope.loggedIn eq null or not sessionScope.loggedIn)?pageContext.response.sendRedirect("login"):null}
 <html lang="ru">
 <head>
     <title>CRM</title>
@@ -11,8 +10,8 @@ ${(sessionScope.loggedIn eq null or not sessionScope.loggedIn)?pageContext.respo
     <title>Companies</title>
 
     <!-- Bootstrap -->
-    <link href="/resources/CSS/bootstrap.css" rel="stylesheet">
-    <link href="/resources/CSS/main.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/CSS/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/CSS/main.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid">
@@ -52,6 +51,11 @@ ${(sessionScope.loggedIn eq null or not sessionScope.loggedIn)?pageContext.respo
             </ul>
         </div>
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+
+            <br>
+            <a class="btn btn-sm btn-primary btn-create" href="${pageContext.request.contextPath}/add-company" role="button">New company</a>
+            <br>
+
             <table class="table">
                 <thead>
                 <tr>
@@ -66,12 +70,12 @@ ${(sessionScope.loggedIn eq null or not sessionScope.loggedIn)?pageContext.respo
                 <tbody>
                 <c:forEach var="element" items="${companies}">
                     <tr>
-                        <td>${element.comp_name}</td>
-                        <td>${element.comp_address}</td>
-                        <td>${element.comp_website}</td>
-                        <td>${element.comp_phone_number}</td>
-                        <td>${element.comp_email}</td>
-                        <td>${element.contact_type}</td>
+                        <td>${element.companyName}</td>
+                        <td>${element.companyAddress}</td>
+                        <td>${element.companyWebsite}</td>
+                        <td>${element.companyPhoneNumber}</td>
+                        <td>${element.companyEmail}</td>
+                        <td>${element.contactType}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

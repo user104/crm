@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-${(sessionScope.loggedIn eq null or not sessionScope.loggedIn)?pageContext.response.sendRedirect("login"):null}
 <html lang="ru">
 <head>
     <title>CRM</title>
@@ -11,8 +10,8 @@ ${(sessionScope.loggedIn eq null or not sessionScope.loggedIn)?pageContext.respo
     <title>Bootstrap 101 Template</title>
 
     <!-- Bootstrap -->
-    <link href="/resources/CSS/bootstrap.css" rel="stylesheet">
-    <link href="/resources/CSS/main.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/CSS/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/CSS/main.css" type="text/css" rel="stylesheet">
 
 </head>
 <body>
@@ -66,11 +65,11 @@ ${(sessionScope.loggedIn eq null or not sessionScope.loggedIn)?pageContext.respo
                 <tbody>
                 <c:forEach var="element" items="${tasks}">
                     <tr>
-                        <td>${element.task_name}</td>
-                        <td>${element.comp_name}</td>
-                        <td>${element.cont_name}</td>
+                        <td>${element.taskName}</td>
+                        <td>${element.dealings.contactPerson.companies.companyName}</td>
+                        <td>${element.dealings.contactPerson.conactName}</td>
                         <td>${element.deadline}</td>
-                        <td>${element.task_status}</td>
+                        <td>${element.taskStatus}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

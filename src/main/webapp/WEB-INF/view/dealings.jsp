@@ -1,24 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-${(sessionScope.loggedIn eq null or not sessionScope.loggedIn)?pageContext.response.sendRedirect("login"):null}
 <html lang="ru">
 <head>
     <title>CRM</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
 
     <!-- Bootstrap -->
-    <link href="/resources/CSS/bootstrap.css" rel="stylesheet">
-    <link href="/resources/CSS/main.css" type="text/css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="${pageContext.request.contextPath}/resources/CSS/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/CSS/main.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid">
@@ -72,12 +63,12 @@ ${(sessionScope.loggedIn eq null or not sessionScope.loggedIn)?pageContext.respo
                 <tbody>
                 <c:forEach var="element" items="${dealings}">
                     <tr>
-                        <td>${element.deal_name}</td>
-                        <td>${element.comp_name}</td>
-                        <td>${element.cont_name}</td>
-                        <td>${element.deal_budget}</td>
-                        <td>${element.deal_status}</td>
-                        <td>${element.deal_stage}</td>
+                        <td>${element.dealName}</td>
+                        <td>${element.contactPerson.companies.companyName}</td>
+                        <td>${element.contactPerson.conactName}</td>
+                        <td>${element.dealBudget}</td>
+                        <td>${element.dealStatus}</td>
+                        <td>${element.dealStage}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

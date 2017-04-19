@@ -1,4 +1,4 @@
-package my.crm.model;
+package my.crm.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class ContactPerson {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "cont_name")
+    @Column(name = "cont_name", unique = true, nullable = false)
     private String conactName;
 
     @Column(name = "cont_position")
@@ -25,27 +25,22 @@ public class ContactPerson {
     @Column(name = "cont_email")
     private String conactEmail;
 
-    @Column(name = "contact_type")
-    private String conactType;
-
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Companies companies;
 
-    @OneToMany(mappedBy = "contactPerson", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "contactPerson", fetch = FetchType.LAZY)
     private List<Dealings> dealings = new ArrayList<>();
 
     public ContactPerson(){
 
     }
 
-    public ContactPerson(String conactName, String conactPosition, String conactPhoneNumber, String conactEmail, String conactType, Companies companies, List<Dealings> dealings) {
+    public ContactPerson(String conactName, String conactPosition, String conactPhoneNumber, String conactEmail, Companies companies) {
         this.conactName = conactName;
         this.conactPosition = conactPosition;
         this.conactPhoneNumber = conactPhoneNumber;
         this.conactEmail = conactEmail;
-        this.conactType = conactType;
         this.companies = companies;
-        this.dealings = dealings;
     }
 
     public int getId() {
@@ -88,14 +83,6 @@ public class ContactPerson {
         this.conactEmail = conactEmail;
     }
 
-    public String getConactType() {
-        return conactType;
-    }
-
-    public void setConactType(String conactType) {
-        this.conactType = conactType;
-    }
-
     public Companies getCompanies() {
         return companies;
     }
@@ -126,7 +113,6 @@ public class ContactPerson {
         if (conactPhoneNumber != null ? !conactPhoneNumber.equals(that.conactPhoneNumber) : that.conactPhoneNumber != null)
             return false;
         if (conactEmail != null ? !conactEmail.equals(that.conactEmail) : that.conactEmail != null) return false;
-        if (conactType != null ? !conactType.equals(that.conactType) : that.conactType != null) return false;
         if (companies != null ? !companies.equals(that.companies) : that.companies != null) return false;
         return dealings != null ? dealings.equals(that.dealings) : that.dealings == null;
     }
@@ -138,7 +124,6 @@ public class ContactPerson {
         result = 31 * result + (conactPosition != null ? conactPosition.hashCode() : 0);
         result = 31 * result + (conactPhoneNumber != null ? conactPhoneNumber.hashCode() : 0);
         result = 31 * result + (conactEmail != null ? conactEmail.hashCode() : 0);
-        result = 31 * result + (conactType != null ? conactType.hashCode() : 0);
         result = 31 * result + (companies != null ? companies.hashCode() : 0);
         result = 31 * result + (dealings != null ? dealings.hashCode() : 0);
         return result;

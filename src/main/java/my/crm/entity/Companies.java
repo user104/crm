@@ -1,4 +1,4 @@
-package my.crm.model;
+package my.crm.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class Companies {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "comp_name")
+    @Column(name = "comp_name", unique = true, nullable = false)
     private String companyName;
 
     @Column(name = "comp_address")
@@ -28,7 +28,10 @@ public class Companies {
     @Column(name = "comp_email")
     private String companyEmail;
 
-    @OneToMany(mappedBy = "companies", fetch = FetchType.EAGER)
+    @Column(name = "contact_type")
+    private String contactType;
+
+    @OneToMany(mappedBy = "companies", fetch = FetchType.LAZY)
     private List<ContactPerson> contactPersons = new ArrayList<>();
 
 
@@ -36,13 +39,13 @@ public class Companies {
 
     }
 
-    public Companies(String companyName, String companyAddress, String companyWebsite, String companyPhoneNumber, String companyEmail, List<ContactPerson> contactPersons) {
+    public Companies(String companyName, String companyAddress, String companyWebsite, String companyPhoneNumber, String companyEmail, String contactType) {
         this.companyName = companyName;
         this.companyAddress = companyAddress;
         this.companyWebsite = companyWebsite;
         this.companyPhoneNumber = companyPhoneNumber;
         this.companyEmail = companyEmail;
-        this.contactPersons = contactPersons;
+        this.contactType = contactType;
     }
 
     public int getId() {
@@ -93,6 +96,14 @@ public class Companies {
         this.companyEmail = companyEmail;
     }
 
+    public String getContactType() {
+        return contactType;
+    }
+
+    public void setContactType(String contactType) {
+        this.contactType = contactType;
+    }
+
     public List<ContactPerson> getContactPersons() {
         return contactPersons;
     }
@@ -119,6 +130,8 @@ public class Companies {
             return false;
         if (companyEmail != null ? !companyEmail.equals(companies.companyEmail) : companies.companyEmail != null)
             return false;
+        if (contactType != null ? !contactType.equals(companies.contactType) : companies.contactType != null)
+            return false;
         return contactPersons != null ? contactPersons.equals(companies.contactPersons) : companies.contactPersons == null;
     }
 
@@ -130,6 +143,7 @@ public class Companies {
         result = 31 * result + (companyWebsite != null ? companyWebsite.hashCode() : 0);
         result = 31 * result + (companyPhoneNumber != null ? companyPhoneNumber.hashCode() : 0);
         result = 31 * result + (companyEmail != null ? companyEmail.hashCode() : 0);
+        result = 31 * result + (contactType != null ? contactType.hashCode() : 0);
         result = 31 * result + (contactPersons != null ? contactPersons.hashCode() : 0);
         return result;
     }

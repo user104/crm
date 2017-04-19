@@ -1,17 +1,18 @@
 package my.crm.model;
 
+import my.crm.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-
-import java.sql.*;;
 import java.util.List;
 
 public class Action {
 
+
+    //TODO wild card generics
     public List<Companies> companies() {
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -92,33 +93,33 @@ public class Action {
         }
     }
 
-    public boolean login(String login, String password) {
-        if (login != null && password !=null) {
-            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-            SessionFactory factory = null;
-            try {
-
-                factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-                Session session = factory.getCurrentSession();
-                session.beginTransaction();
-                //noinspection JpaQlInspection
-                List<User> users = session.createQuery("FROM User").getResultList();
-                session.getTransaction().commit();
-
-                for (User user : users) {
-                    if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
-                        return true;
-                    }
-                }
-
-            } finally {
-                if (factory != null) {
-                    factory.close();
-                }
-            }
-        }
-        return false;
-    }
+//    public boolean login(String login, String password) {
+//        if (login != null && password != null) {
+//            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+//            SessionFactory factory = null;
+//            try {
+//
+//                factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+//                Session session = factory.getCurrentSession();
+//                session.beginTransaction();
+//                //noinspection JpaQlInspection
+//                List<User> users = session.createQuery("FROM User").getResultList();
+//                session.getTransaction().commit();
+//
+//                for (User user : users) {
+//                    if (user.getUsername().equals(login) && user.getPassword().equals(password)) {
+//                        return true;
+//                    }
+//                }
+//
+//            } finally {
+//                if (factory != null) {
+//                    factory.close();
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
     public boolean checkLogin(String login) {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
@@ -132,7 +133,7 @@ public class Action {
             session.getTransaction().commit();
 
             for (User user : users) {
-                if (user.getLogin().equals(login)) {
+                if (user.getUsername().equals(login)) {
                     return false;
                 }
             }
@@ -177,8 +178,70 @@ public class Action {
                 factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
                 Session session = factory.getCurrentSession();
                 session.beginTransaction();
-                User user = new User(login,password,email);
+                User user = new User(login, password, email);
                 session.persist(user);
+                session.getTransaction().commit();
+
+            } finally {
+                if (factory != null) {
+                    factory.close();
+                }
+            }
+        }
+    }
+
+    public void addCompany(String companyName,
+                           String companyAddress,
+                           String companyWebsite,
+                           String companyPhoneNumber,
+                           String companyEmail,
+                           String contactType) {
+
+        if (companyName != null && companyPhoneNumber != null && contactType != null) {
+            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+            SessionFactory factory = null;
+            try {
+
+                factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+                Session session = factory.getCurrentSession();
+                session.beginTransaction();
+                Companies companie = new Companies(companyName,
+                        companyAddress,
+                        companyWebsite,
+                        companyPhoneNumber,
+                        companyEmail,
+                        contactType);
+                session.persist(companie);
+                session.getTransaction().commit();
+
+            } finally {
+                if (factory != null) {
+                    factory.close();
+                }
+            }
+        }
+    }
+
+    public void addContact(String conactName,
+                           String conactPosition,
+                           String conactPhoneNumber,
+                           String conactEmail,
+                           Companies companies) {
+
+        if (conactName != null && conactPosition != null && conactPhoneNumber != null) {
+            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+            SessionFactory factory = null;
+            try {
+
+                factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+                Session session = factory.getCurrentSession();
+                session.beginTransaction();
+                ContactPerson contactPerson = new ContactPerson(conactName,
+                        conactPosition,
+                        conactPhoneNumber,
+                        conactEmail,
+                        companies);
+                session.persist(contactPerson);
                 session.getTransaction().commit();
 
             } finally {

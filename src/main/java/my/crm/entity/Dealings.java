@@ -1,4 +1,4 @@
-package my.crm.model;
+package my.crm.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class Dealings {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "deal_name")
+    @Column(name = "deal_name", nullable = false)
     private String dealName;
 
     @Column(name = "deal_budget")
@@ -28,7 +28,7 @@ public class Dealings {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private ContactPerson contactPerson;
 
-    @OneToMany(mappedBy = "dealings", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "dealings", fetch = FetchType.LAZY)
     private List<Tasks> tasks = new ArrayList<>();
 
     public Dealings() {

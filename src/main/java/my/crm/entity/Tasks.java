@@ -1,4 +1,4 @@
-package my.crm.model;
+package my.crm.entity;
 
 import javax.persistence.*;
 
