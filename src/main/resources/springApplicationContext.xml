@@ -75,10 +75,14 @@
         <security:intercept-url pattern="/persons" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/persons" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/tasks" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/add-company" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/add-contact" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/add-deal" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/add-task" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/test-admin" access="hasRole('ROLE_ADMIN')"/>
         <security:form-login login-page="/login"/>
         <!--remember-me-cookie= - название куки (чтобы к примеру обратится к ним прмощью джава скрипта)-->
-        <security:remember-me remember-me-parameter="rememberJava" remember-me-cookie="crm" user-service-ref="jdbcUserService" token-repository-ref="token" token-validity-seconds="1800"/>
+        <security:remember-me remember-me-parameter="rememberJava" remember-me-cookie="crm" user-service-ref="jdbcUserService" token-repository-ref="token" token-validity-seconds="86400"/>
         <security:csrf disabled="true"/>
     </security:http>
 

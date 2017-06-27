@@ -84,7 +84,7 @@ public class SpringController {
 
     @RequestMapping("/companies")
     public String getCompaniesPage(Model model) {
-        List<Companies> companies = action.companies();
+        List<Company> companies = action.companies();
         model.addAttribute("companies", companies);
         return "companies";
     }
@@ -140,12 +140,12 @@ public class SpringController {
                              @RequestParam("contactType") String contactType) {
 
         action.addCompany(companyName, companyAddress, companyWebsite, companyPhoneNumber, companyEmail, contactType);
-        return "companies";
+        return "redirect:/companies";
     }
 
     @RequestMapping("/add-contact")
     public String getAddContactPage(Model model) {
-        List<Companies> companies = action.companies();
+        List<Company> companies = action.companies();
         model.addAttribute("companies", companies);
         return "addContactPerson";
     }
@@ -163,4 +163,14 @@ public class SpringController {
 //        return "persons";
 //    }
 
+    @RequestMapping("/add-deal")
+    public String getAddDealPage() {
+        return "addDealing";
+    }
+    
+      @RequestMapping("/add-task")
+    public String getAddTaskPage() {
+        return "addTask";
+    }
+    
 }

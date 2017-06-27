@@ -29,8 +29,8 @@ ${(sessionScope.loggedIn)?pageContext.response.sendRedirect("companies"):null}
                             <input type="text" class="form-control" name="username" placeholder="Username" required
                                    autofocus>
                             <input type="password" class="form-control" name="password" placeholder="Password" required>
-                            <label>
-                                <input type="checkbox" name="rememberJava" checked>
+                            <label class="h5">
+                                <input type="checkbox" name="rememberJava" checked/>
                                 Keep me signed in.
                             </label>
                             <input type="submit" class="btn btn-lg btn-default btn-block" value="Sign In"/>

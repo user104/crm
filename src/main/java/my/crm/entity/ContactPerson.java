@@ -26,7 +26,7 @@ public class ContactPerson {
     private String conactEmail;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private Companies companies;
+    private Company companies;
 
     @OneToMany(mappedBy = "contactPerson", fetch = FetchType.LAZY)
     private List<Dealings> dealings = new ArrayList<>();
@@ -35,7 +35,7 @@ public class ContactPerson {
 
     }
 
-    public ContactPerson(String conactName, String conactPosition, String conactPhoneNumber, String conactEmail, Companies companies) {
+    public ContactPerson(String conactName, String conactPosition, String conactPhoneNumber, String conactEmail, Company companies) {
         this.conactName = conactName;
         this.conactPosition = conactPosition;
         this.conactPhoneNumber = conactPhoneNumber;
@@ -83,11 +83,11 @@ public class ContactPerson {
         this.conactEmail = conactEmail;
     }
 
-    public Companies getCompanies() {
+    public Company getCompanies() {
         return companies;
     }
 
-    public void setCompanies(Companies companies) {
+    public void setCompanies(Company companies) {
         this.companies = companies;
     }
 

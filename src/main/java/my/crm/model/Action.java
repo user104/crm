@@ -6,23 +6,22 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
+
 import java.util.List;
 
 public class Action {
 
 
     //TODO wild card generics
-    public List<Companies> companies() {
-        SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(Companies.class)
-                .buildSessionFactory();
+    public List<Company> companies() {
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+        SessionFactory sessionFactory = null;
         try {
+
+            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
-            //noinspection JpaQlInspection
-            List<Companies> listOfCompanies = session.createQuery("FROM Companies").getResultList();
+            List<Company> listOfCompanies = session.createQuery("FROM Company").getResultList();
             session.getTransaction().commit();
             return listOfCompanies;
 
@@ -34,14 +33,12 @@ public class Action {
     }
 
     public List<ContactPerson> persons() {
-        SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(ContactPerson.class)
-                .buildSessionFactory();
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+        SessionFactory sessionFactory = null;
         try {
+            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
-            //noinspection JpaQlInspection
             List<ContactPerson> listOfPersosns = session.createQuery("FROM ContactPerson").getResultList();
             session.getTransaction().commit();
             return listOfPersosns;
@@ -54,11 +51,10 @@ public class Action {
     }
 
     public List<Dealings> dealings() {
-        SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(Dealings.class)
-                .buildSessionFactory();
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+        SessionFactory sessionFactory = null;
         try {
+            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
             //noinspection JpaQlInspection
@@ -74,11 +70,10 @@ public class Action {
     }
 
     public List<Tasks> tasks() {
-        SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(Tasks.class)
-                .buildSessionFactory();
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+        SessionFactory sessionFactory = null;
         try {
+            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
             //noinspection JpaQlInspection
@@ -92,34 +87,6 @@ public class Action {
             }
         }
     }
-
-//    public boolean login(String login, String password) {
-//        if (login != null && password != null) {
-//            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-//            SessionFactory factory = null;
-//            try {
-//
-//                factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-//                Session session = factory.getCurrentSession();
-//                session.beginTransaction();
-//                //noinspection JpaQlInspection
-//                List<User> users = session.createQuery("FROM User").getResultList();
-//                session.getTransaction().commit();
-//
-//                for (User user : users) {
-//                    if (user.getUsername().equals(login) && user.getPassword().equals(password)) {
-//                        return true;
-//                    }
-//                }
-//
-//            } finally {
-//                if (factory != null) {
-//                    factory.close();
-//                }
-//            }
-//        }
-//        return false;
-//    }
 
     public boolean checkLogin(String login) {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
@@ -205,7 +172,7 @@ public class Action {
                 factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
                 Session session = factory.getCurrentSession();
                 session.beginTransaction();
-                Companies companie = new Companies(companyName,
+                Company companie = new Company(companyName,
                         companyAddress,
                         companyWebsite,
                         companyPhoneNumber,
@@ -226,7 +193,7 @@ public class Action {
                            String conactPosition,
                            String conactPhoneNumber,
                            String conactEmail,
-                           Companies companies) {
+                           Company companies) {
 
         if (conactName != null && conactPosition != null && conactPhoneNumber != null) {
             StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();

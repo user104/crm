@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "companies")
-public class Companies {
+public class Company {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,11 +35,11 @@ public class Companies {
     private List<ContactPerson> contactPersons = new ArrayList<>();
 
 
-    public Companies() {
+    public Company() {
 
     }
 
-    public Companies(String companyName, String companyAddress, String companyWebsite, String companyPhoneNumber, String companyEmail, String contactType) {
+    public Company(String companyName, String companyAddress, String companyWebsite, String companyPhoneNumber, String companyEmail, String contactType) {
         this.companyName = companyName;
         this.companyAddress = companyAddress;
         this.companyWebsite = companyWebsite;
@@ -117,7 +117,7 @@ public class Companies {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Companies companies = (Companies) o;
+        Company companies = (Company) o;
 
         if (id != companies.id) return false;
         if (companyName != null ? !companyName.equals(companies.companyName) : companies.companyName != null)

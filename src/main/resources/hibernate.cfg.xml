@@ -18,7 +18,7 @@
 
         <mapping class="my.crm.entity.User"/>
         <mapping class="my.crm.entity.Authority"/>
-        <mapping class="my.crm.entity.Companies"/>
+        <mapping class="my.crm.entity.Company"/>
         <mapping class="my.crm.entity.ContactPerson"/>
         <mapping class="my.crm.entity.Dealings"/>
         <mapping class="my.crm.entity.Tasks"/>

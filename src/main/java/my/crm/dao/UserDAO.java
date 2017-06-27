@@ -1,5 +1,6 @@
 package my.crm.dao;
 
+import my.crm.entity.Company;
 import my.crm.entity.User;
 
 /**
@@ -9,4 +10,6 @@ import my.crm.entity.User;
 public interface UserDAO {
 
     void createNewUser(User user);
+
+    void saveCompany(Company company);
 }
