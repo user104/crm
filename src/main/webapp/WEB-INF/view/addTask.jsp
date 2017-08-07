@@ -6,44 +6,38 @@
 </head>
 <body>
 <div class="container">
-    <h2 class="text-center">New Company</h2>
+    <h2 class="text-center">New Task</h2>
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <br>
-            <a href="${pageContext.request.contextPath}/companies"><- back</a>
+            <a href="${pageContext.request.contextPath}/tasks"><- back</a>
             <br>
             <!-- Add inputs-->
-            <form method="post" action="${pageContext.request.contextPath}/add">
-                <label for="company-name" class="control-label">Company Name</label>
+            <form method="post" action="${pageContext.request.contextPath}/save-task">
+                <label for="task-name" class="control-label">Task Name</label>
                 <br>
-                <input id="company-name" type="text" name="name" class="form-control" required
-                       placeholder="input company name">
+                <input id="task-name" type="text" name="taskName" class="form-control" required
+                       placeholder="input task name">
                 <br>
-                <label for="address" class="control-label">Address</label>
+                <label for="deadline" class="control-label">Deadline</label>
                 <br>
-                <input id="address" type="text" name="address" class="form-control" required
-                       placeholder="input address">
+                <input id="deadline" type="text" name="deadline" class="form-control" required
+                       placeholder="input deadline">
                 <br>
-                <label for="website" class="control-label">Website</label>
+                <label for="task-status" class="control-label">Task Status</label>
                 <br>
-                <input id="website" type="text" name="website" class="form-control" required
-                       placeholder="input website">
+                <input id="task-status" type="text" name="taskStatus" class="form-control" required
+                       placeholder="input status">
                 <br>
-                <label for="phoneNumber" class="control-label">Phone Number</label>
-                <br>
-                <input id="phoneNumber" type="text" name="phoneNumber" class="form-control" required
-                       placeholder="input phone number">
-                <br>
-                <label for="email" class="control-label">Email</label>
-                <br>
-                <input id="email" type="text" name="email" class="form-control" required placeholder="input email">
                 <br>
 
-                <label for="contact-type" class="control-label">Contact Type</label>
+                <label for="dealing" class="control-label">Contact Type</label>
                 <br>
-                <input id="contact-type" type="text" name="contactType" class="form-control" required
-                       placeholder="input contact type">
-                <br>
+                <select id="dealing" name="DealId">
+                    <c:forEach var="element" items="${dealings}">
+                        <option value="${element.id}">${element.contactPerson.companies.companyName} - ${element.contactPerson.conactName} - ${element.dealName}</option>
+                    </c:forEach>
+                </select>
                 <br>
                 <input type="submit" class="btn btn-primary pull-right" value="Save">
             </form>

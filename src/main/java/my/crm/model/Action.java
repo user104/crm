@@ -189,15 +189,15 @@ public class Action {
         }
     }
 
-    public void addContact(String conactName,
-                           String conactPosition,
-                           String conactPhoneNumber,
-                           String conactEmail,
+    public void addContact(String contactName,
+                           String contactPosition,
+                           String contactPhoneNumber,
+                           String contactEmail,
                            String companyId) {
 
         int setCompanyId = Integer.parseInt(companyId);
 
-        if (conactName != null && conactPosition != null && conactPhoneNumber != null) {
+        if (contactName != null && contactPosition != null && contactPhoneNumber != null) {
             StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
             SessionFactory factory = null;
             try {
@@ -209,13 +209,85 @@ public class Action {
                         .setParameter("companyId", setCompanyId)
                         .getSingleResult();
 
-                ContactPerson contactPerson = new ContactPerson(conactName,
-                        conactPosition,
-                        conactPhoneNumber,
-                        conactEmail,
+                ContactPerson contactPerson = new ContactPerson(contactName,
+                        contactPosition,
+                        contactPhoneNumber,
+                        contactEmail,
                         company);
 
                 session.persist(contactPerson);
+                session.getTransaction().commit();
+
+            } finally {
+                if (factory != null) {
+                    factory.close();
+                }
+            }
+        }
+    }
+
+    public void addDeal(String dealName,
+                           String dealBudget,
+                           String dealStatus,
+                           String dealStage,
+                           String contactPersonId) {
+
+        int setPersonId = Integer.parseInt(contactPersonId);
+
+        if (dealName != null && dealBudget != null && dealStatus != null) {
+            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+            SessionFactory factory = null;
+            try {
+
+                factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+                Session session = factory.getCurrentSession();
+                session.beginTransaction();
+                ContactPerson contactPerson = (ContactPerson) session.createQuery("FROM ContactPerson WHERE id = :contactId")
+                        .setParameter("contactId", setPersonId)
+                        .getSingleResult();
+
+                Dealings dealings = new Dealings(dealName,
+                        dealBudget,
+                        dealStatus,
+                        dealStage,
+                        contactPerson);
+
+                session.persist(dealings);
+                session.getTransaction().commit();
+
+            } finally {
+                if (factory != null) {
+                    factory.close();
+                }
+            }
+        }
+    }
+
+    public void addTask(String taskName,
+                        String deadline,
+                        String taskStatus,
+                        String DealId) {
+
+        int setDealId = Integer.parseInt(DealId);
+
+        if (taskName != null && deadline != null && taskStatus != null) {
+            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+            SessionFactory factory = null;
+            try {
+
+                factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+                Session session = factory.getCurrentSession();
+                session.beginTransaction();
+                Dealings deal = (Dealings) session.createQuery("FROM Dealings WHERE id = :dealId")
+                        .setParameter("dealId", setDealId)
+                        .getSingleResult();
+
+                Tasks tasks = new Tasks(taskName,
+                        deadline,
+                        taskStatus,
+                        deal);
+
+                session.persist(tasks);
                 session.getTransaction().commit();
 
             } finally {

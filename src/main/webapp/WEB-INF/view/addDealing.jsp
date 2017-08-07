@@ -6,44 +6,41 @@
 </head>
 <body>
 <div class="container">
-    <h2 class="text-center">New Company</h2>
+    <h2 class="text-center">New Deal</h2>
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <br>
-            <a href="${pageContext.request.contextPath}/companies"><- back</a>
+            <a href="${pageContext.request.contextPath}/dealings"><- back</a>
             <br>
             <!-- Add inputs-->
-            <form method="post" action="${pageContext.request.contextPath}/add">
-                <label for="company-name" class="control-label">Company Name</label>
+            <form method="post" action="${pageContext.request.contextPath}/save-deal">
+                <label for="deal-name" class="control-label">Deal Name</label>
                 <br>
-                <input id="company-name" type="text" name="name" class="form-control" required
-                       placeholder="input company name">
+                <input id="deal-name" type="text" name="dealName" class="form-control" required
+                       placeholder="input deal name">
                 <br>
-                <label for="address" class="control-label">Address</label>
+                <label for="deal-budget" class="control-label">Deal Budget</label>
                 <br>
-                <input id="address" type="text" name="address" class="form-control" required
-                       placeholder="input address">
+                <input id="deal-budget" type="text" name="dealBudget" class="form-control" required
+                       placeholder="input budget">
                 <br>
-                <label for="website" class="control-label">Website</label>
+                <label for="deal-status" class="control-label">Deal Status</label>
                 <br>
-                <input id="website" type="text" name="website" class="form-control" required
-                       placeholder="input website">
+                <input id="deal-status" type="text" name="dealStatus" class="form-control" required
+                       placeholder="input status">
                 <br>
-                <label for="phoneNumber" class="control-label">Phone Number</label>
+                <label for="deal-stage" class="control-label">Deal Stage</label>
                 <br>
-                <input id="phoneNumber" type="text" name="phoneNumber" class="form-control" required
-                       placeholder="input phone number">
+                <input id="deal-stage" type="text" name="dealStage" class="form-control" required
+                       placeholder="input stage">
                 <br>
-                <label for="email" class="control-label">Email</label>
+                <label for="contact-person" class="control-label">Contact</label>
                 <br>
-                <input id="email" type="text" name="email" class="form-control" required placeholder="input email">
-                <br>
-
-                <label for="contact-type" class="control-label">Contact Type</label>
-                <br>
-                <input id="contact-type" type="text" name="contactType" class="form-control" required
-                       placeholder="input contact type">
-                <br>
+                <select id="contact-person" name="contactPersonId">
+                    <c:forEach var="element" items="${contactPersons}">
+                        <option value="${element.id}">${element.companies.companyName} - ${element.conactName}</option>
+                    </c:forEach>
+                </select>
                 <br>
                 <input type="submit" class="btn btn-primary pull-right" value="Save">
             </form>

@@ -164,13 +164,38 @@ public class SpringController {
     }
 
     @RequestMapping("/add-deal")
-    public String getAddDealPage() {
+    public String getAddDealPage(Model model) {
+        List<ContactPerson> contactPersonList = action.persons();
+        model.addAttribute("contactPersons", contactPersonList );
         return "addDealing";
     }
 
+    @RequestMapping(value = "/save-deal", method = RequestMethod.POST)
+    public String addDeal(@RequestParam("dealName") String dealName,
+                             @RequestParam("dealBudget") String dealBudget,
+                             @RequestParam("dealStatus") String dealStatus,
+                             @RequestParam("dealStage") String dealStage,
+                             @RequestParam("contactPersonId") String contactPersonId) {
+
+        action.addDeal(dealName, dealBudget, dealStatus, dealStage, contactPersonId);
+        return "redirect:/dealings";
+    }
+
     @RequestMapping("/add-task")
-    public String getAddTaskPage() {
+    public String getAddTaskPage(Model model) {
+        List<Dealings> dealingsList = action.dealings();
+        model.addAttribute("dealings", dealingsList );
         return "addTask";
+    }
+
+    @RequestMapping(value = "/save-task", method = RequestMethod.POST)
+    public String addTask(@RequestParam("taskName") String taskName,
+                          @RequestParam("deadline") String deadline,
+                          @RequestParam("taskStatus") String taskStatus,
+                          @RequestParam("DealId") String DealId) {
+
+        action.addTask(taskName, deadline, taskStatus, DealId);
+        return "redirect:/tasks";
     }
 
 }

@@ -35,6 +35,14 @@ public class Dealings {
 
     }
 
+    public Dealings(String dealName, String dealBudget, String dealStatus, String dealStage, ContactPerson contactPerson) {
+        this.dealName = dealName;
+        this.dealBudget = dealBudget;
+        this.dealStatus = dealStatus;
+        this.dealStage = dealStage;
+        this.contactPerson = contactPerson;
+    }
+
     public Dealings(String dealName, String dealBudget, String dealStatus, String dealStage, ContactPerson contactPerson, List<Tasks> tasks) {
         this.dealName = dealName;
         this.dealBudget = dealBudget;

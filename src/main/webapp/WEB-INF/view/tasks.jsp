@@ -52,6 +52,12 @@
             </ul>
         </div>
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+
+            <br>
+            <a class="btn btn-sm btn-primary btn-create" href="${pageContext.request.contextPath}/add-task"
+               role="button">New Task</a>
+            <br>
+
             <table class="table">
                 <thead>
                 <tr>

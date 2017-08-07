@@ -27,6 +27,8 @@ public class Tasks {
 
     }
 
+
+
     public Tasks(String taskName, String deadline, String taskStatus, Dealings dealings) {
         this.taskName = taskName;
         this.deadline = deadline;
