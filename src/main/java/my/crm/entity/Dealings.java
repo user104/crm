@@ -25,7 +25,7 @@ public class Dealings {
     @Column(name = "deal_stage")
     private String dealStage;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     private ContactPerson contactPerson;
 
     @OneToMany(mappedBy = "dealings", fetch = FetchType.LAZY)

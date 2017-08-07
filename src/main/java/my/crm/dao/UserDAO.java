@@ -11,5 +11,5 @@ public interface UserDAO {
 
     void createNewUser(User user);
 
-    void saveCompany(Company company);
+//    void saveCompany(Company company);
 }

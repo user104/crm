@@ -30,9 +30,9 @@ public class UserDAOImpl implements UserDAO {
         session.persist(user);
     }
 
-    @Override
-    public void saveCompany(Company company) {
-        Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(company);
-    }
+//    @Override
+//    public void saveCompany(Company company) {
+//        Session session = sessionFactory.getCurrentSession();
+//        session.saveOrUpdate(company);
+//    }
 }

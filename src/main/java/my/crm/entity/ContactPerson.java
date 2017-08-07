@@ -25,10 +25,10 @@ public class ContactPerson {
     @Column(name = "cont_email")
     private String conactEmail;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     private Company companies;
 
-    @OneToMany(mappedBy = "contactPerson", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "contactPerson", fetch = FetchType.EAGER)
     private List<Dealings> dealings = new ArrayList<>();
 
     public ContactPerson(){
@@ -41,6 +41,13 @@ public class ContactPerson {
         this.conactPhoneNumber = conactPhoneNumber;
         this.conactEmail = conactEmail;
         this.companies = companies;
+    }
+
+    public ContactPerson(String conactName, String conactPosition, String conactPhoneNumber, String conactEmail) {
+        this.conactName = conactName;
+        this.conactPosition = conactPosition;
+        this.conactPhoneNumber = conactPhoneNumber;
+        this.conactEmail = conactEmail;
     }
 
     public int getId() {

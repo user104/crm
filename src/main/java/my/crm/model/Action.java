@@ -193,7 +193,9 @@ public class Action {
                            String conactPosition,
                            String conactPhoneNumber,
                            String conactEmail,
-                           Company companies) {
+                           String companyId) {
+
+        int setCompanyId = Integer.parseInt(companyId);
 
         if (conactName != null && conactPosition != null && conactPhoneNumber != null) {
             StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
@@ -203,11 +205,16 @@ public class Action {
                 factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
                 Session session = factory.getCurrentSession();
                 session.beginTransaction();
+                Company company = (Company) session.createQuery("FROM Company WHERE id = :companyId")
+                        .setParameter("companyId", setCompanyId)
+                        .getSingleResult();
+
                 ContactPerson contactPerson = new ContactPerson(conactName,
                         conactPosition,
                         conactPhoneNumber,
                         conactEmail,
-                        companies);
+                        company);
+
                 session.persist(contactPerson);
                 session.getTransaction().commit();
 

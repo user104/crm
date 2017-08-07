@@ -20,7 +20,7 @@ public class Tasks {
     @Column(name = "task_status")
     private String taskStatus;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     private Dealings dealings;
 
     public Tasks(){

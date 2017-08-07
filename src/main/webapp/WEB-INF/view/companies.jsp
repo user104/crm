@@ -4,14 +4,14 @@
 <head>
     <title>CRM</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%--<meta http-equiv="X-UA-Compatible" content="IE=edge">--%>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Companies</title>
 
     <!-- Bootstrap -->
-    <link href="${pageContext.request.contextPath}/resources/CSS/bootstrap.css" type="text/css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/resources/CSS/main.css" type="text/css" rel="stylesheet">
+    <link href="<c:url value="/resources/CSS/bootstrap.css"/>" type="text/css" rel="stylesheet">
+    <link href="<c:url value="/resources/CSS/main.css"/>" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid">
@@ -53,7 +53,8 @@
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 
             <br>
-            <a class="btn btn-sm btn-primary btn-create" href="${pageContext.request.contextPath}/add-company" role="button">New company</a>
+            <a class="btn btn-sm btn-primary btn-create" href="${pageContext.request.contextPath}/add-company"
+               role="button">New company</a>
             <br>
 
             <table class="table">

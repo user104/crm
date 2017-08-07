@@ -31,7 +31,7 @@ public class Company {
     @Column(name = "contact_type")
     private String contactType;
 
-    @OneToMany(mappedBy = "companies", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "companies", fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE})
     private List<ContactPerson> contactPersons = new ArrayList<>();
 
 
@@ -146,5 +146,18 @@ public class Company {
         result = 31 * result + (contactType != null ? contactType.hashCode() : 0);
         result = 31 * result + (contactPersons != null ? contactPersons.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", companyName='" + companyName + '\'' +
+                ", companyAddress='" + companyAddress + '\'' +
+                ", companyWebsite='" + companyWebsite + '\'' +
+                ", companyPhoneNumber='" + companyPhoneNumber + '\'' +
+                ", companyEmail='" + companyEmail + '\'' +
+                ", contactType='" + contactType + '\'' +
+                '}';
     }
 }

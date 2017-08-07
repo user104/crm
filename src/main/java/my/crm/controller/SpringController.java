@@ -58,9 +58,9 @@ public class SpringController {
         //TODO: нужно ли проверять?
 //        if (action.checkLogin(login)) {
 //            if (action.checkEmail(email)) {
-                userService.createNewUser(user);
+        userService.createNewUser(user);
 //                model.addAttribute("registrationSuccess", "Your registration has been successful!");
-                return "redirect:/login";
+        return "redirect:/login";
 //            } else {
 //                model.addAttribute("registrationError", "Email is already in use");
 //                return "registration";
@@ -152,25 +152,25 @@ public class SpringController {
 
 
     // TODO: patern builder
-//    @RequestMapping(value = "/save-contact", method = RequestMethod.POST)
-//    public String addContact(@RequestParam("contactName") String contactName,
-//                             @RequestParam("position") String conactPosition,
-//                             @RequestParam("phoneNumber") String conactPhoneNumber,
-//                             @RequestParam("email") String conactEmail,
-//                             @RequestParam("company") ) {
-//
-//        action.addContact(contactName,conactPosition,conactPhoneNumber,conactEmail, );
-//        return "persons";
-//    }
+    @RequestMapping(value = "/save-contact", method = RequestMethod.POST)
+    public String addContact(@RequestParam("contactName") String contactName,
+                             @RequestParam("position") String conactPosition,
+                             @RequestParam("phoneNumber") String conactPhoneNumber,
+                             @RequestParam("email") String conactEmail,
+                             @RequestParam("company") String companyId) {
+
+                action.addContact(contactName, conactPosition, conactPhoneNumber, conactEmail, companyId);
+        return "redirect:/persons";
+    }
 
     @RequestMapping("/add-deal")
     public String getAddDealPage() {
         return "addDealing";
     }
-    
-      @RequestMapping("/add-task")
+
+    @RequestMapping("/add-task")
     public String getAddTaskPage() {
         return "addTask";
     }
-    
+
 }
